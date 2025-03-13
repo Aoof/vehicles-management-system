@@ -8,9 +8,10 @@ namespace Exceptions
         public static int VehicleErrors
         {
             get { return vehicleErrors; }
+            private set { vehicleErrors = value; }
         }
-        public VehicleException() : base() { vehicleErrors++; }
-        public VehicleException(string message) : base(message) { vehicleErrors++; }
-        public VehicleException(string message, Exception inner) : base(message, inner) { vehicleErrors++; }
+        public VehicleException() : base() { VehicleErrors++; }
+        public VehicleException(string message) : base(message) { VehicleErrors++; }
+        public VehicleException(string message, Exception inner) : base(message, inner) { VehicleErrors++; }
     }
 }
