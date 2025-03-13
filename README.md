@@ -78,3 +78,5 @@ Service classes for application operations:
 
 
 ## License
+
+MIT License
