@@ -20,11 +20,15 @@ A comprehensive C# application for managing different types of vehicles, includi
 
 The system supports multiple vehicle types:
 
-- **Car**: Basic passenger vehicle implementation
-- **Truck**: Vehicle with cargo capacity
-- **Boat**: Water-based vehicle
-- **RaceCar**: High-performance vehicle with specialized attributes
-- **LuxuryYacht**: High-end water vehicle with luxury features
+- **Vehicle**: Abstract base class for all vehicle types
+- **Car**: Basic passenger vehicle implementation with horsepower and model
+- **Truck**: Vehicle with cargo load capacity
+- **Boat**: Water-based vehicle with seating capacity
+- **RaceCar**: High-performance vehicle with turbo boost capability
+- **LuxuryYacht**: High-end water vehicle with luxury features including helipad
+- **Airplane**: Flying vehicle with altitude capabilities
+- **CargoAirplane**: Specialized airplane for transporting cargo
+- **Train**: Rail-based vehicle with multiple units
 
 ### Exceptions
 
