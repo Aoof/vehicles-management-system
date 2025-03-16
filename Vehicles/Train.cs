@@ -1,4 +1,5 @@
 using System;
+using Common;
 
 namespace Vehicles
 {
@@ -21,10 +22,14 @@ namespace Vehicles
             Units = train.Units;
         }
 
-        public override void LoadFromStringArray(string[] values)
+        public Train(string[] values) : base(values)
         {
-            base.LoadFromStringArray(values);
-            Units = Convert.ToInt32(values[IUNITS]);
+            Units = Convert.ToInt32(values[VehicleConstants.IUNITS]);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $",{Units}";
         }
 
         public override double CalculateTax()

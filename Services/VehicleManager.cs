@@ -46,6 +46,19 @@ public static class VehicleManager
         return result;
     }
 
+    public static bool VehicleExists(Vehicle vehicle)
+    {
+        for (int i = 0; i < vehicles.Length; i++)
+        {
+            if (vehicles[i].Equals(vehicle))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void RemoveVehicle(Vehicle vehicle)
     {
         for (int i = 0; i < vehicles.Length; i++)
@@ -64,6 +77,12 @@ public static class VehicleManager
 
     public static void AddVehicle(Vehicle vehicle)
     {
+        if (VehicleExists(vehicle))
+        {
+            Console.WriteLine("Vehicle already exists.");
+            return;
+        }
+
         Vehicle[] newVehicles = new Vehicle[vehicles.Length + 1];
         for (int i = 0; i < vehicles.Length; i++)
         {

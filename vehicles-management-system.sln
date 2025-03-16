@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vehicles", "Vehicles\Vehicl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{818C32A2-E600-4540-8FB5-8A8E95C4677F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{851E40D9-0373-4F39-BCDC-8B2E74D3165A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{818C32A2-E600-4540-8FB5-8A8E95C4677F}.Release|x64.Build.0 = Release|Any CPU
 		{818C32A2-E600-4540-8FB5-8A8E95C4677F}.Release|x86.ActiveCfg = Release|Any CPU
 		{818C32A2-E600-4540-8FB5-8A8E95C4677F}.Release|x86.Build.0 = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|x64.Build.0 = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Debug|x86.Build.0 = Debug|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|x64.ActiveCfg = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|x64.Build.0 = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|x86.ActiveCfg = Release|Any CPU
+		{851E40D9-0373-4F39-BCDC-8B2E74D3165A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

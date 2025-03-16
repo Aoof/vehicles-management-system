@@ -1,4 +1,5 @@
 using System;
+using Common;
 
 namespace Vehicles
 {
@@ -16,10 +17,14 @@ namespace Vehicles
             TurboBoost = turboBoost;
         }
 
-        public override void LoadFromStringArray(string[] values)
+        public RaceCar(string[] values) : base(values)
         {
-            base.LoadFromStringArray(values);
-            TurboBoost = Convert.ToBoolean(values[ITURBOBOOST]);
+            TurboBoost = Convert.ToBoolean(values[VehicleConstants.ITURBOBOOST]);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $",{TurboBoost}";
         }
 
         public override double CalculateTax()

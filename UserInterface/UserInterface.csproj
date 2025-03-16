@@ -5,6 +5,7 @@
     <ProjectReference Include="..\IndependentClasses\IndependentClasses.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

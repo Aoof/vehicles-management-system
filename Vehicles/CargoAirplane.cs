@@ -1,5 +1,6 @@
 using System;
 using Exceptions;
+using Common;
 
 namespace Vehicles
 {
@@ -24,10 +25,14 @@ namespace Vehicles
             CargoCapacity = cargoAirplane.CargoCapacity;
         }
 
-        public override void LoadFromStringArray(string[] values)
+        public CargoAirplane(string[] values) : base(values)
         {
-            base.LoadFromStringArray(values);
-            CargoCapacity = Convert.ToDouble(values[ICARGOCAPACITY]);
+            CargoCapacity = Convert.ToDouble(values[VehicleConstants.ICARGOCAPACITY]);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $",{CargoCapacity}";
         }
 
         public override double CalculateTax()

@@ -265,9 +265,9 @@ public static class Cli
             Console.WriteLine("Load Vehicles from File");
             Console.WriteLine("======================");
             
-            // TODO: Implement file loading functionality
+            FileHandler.LoadFromFile();
             
-            Console.WriteLine("This feature is not implemented yet.");
+            Console.WriteLine("Vehicles loaded successfully.");
         }
         catch (Exception ex)
         {

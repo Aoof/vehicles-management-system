@@ -1,4 +1,5 @@
 using System;
+using Common;
 
 namespace Vehicles
 {
@@ -25,11 +26,15 @@ namespace Vehicles
             Model = car.Model;
         }
 
-        public override void LoadFromStringArray(string[] values)
+        public Car(string[] values) : base(values)
         {
-            base.LoadFromStringArray(values);
-            Horsepower = Convert.ToInt32(values[IHORSEPOWER]);
-            Model = values[IMODEL];
+            Horsepower = Convert.ToInt32(values[VehicleConstants.IHORSEPOWER]);
+            Model = values[VehicleConstants.IMODEL];
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $",{Horsepower},{Model}";
         }
 
         public override double CalculateTax()

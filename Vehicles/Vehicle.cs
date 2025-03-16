@@ -1,25 +1,11 @@
 using System;
 using Exceptions;
+using Common;
 
 namespace Vehicles
 {
     public abstract class Vehicle
     {
-        public const int INAME = 0; 
-        public const int IPRICE = 1;
-        public const int ISPEED = 2;
-        public const int ITYPE = 3;
-        public const int ILOADCAPACITY = 4; // For Truck
-        public const int ISEATINGCAPACITY = 4; // For Boat
-        public const int IUNITS = 4; // For Train
-        public const int IHORSEPOWER = 4; // For Car
-        public const int IALTITUDE = 4; // For Plane
-        public const int IMODEL = 5; // For Car
-        public const int ICARGOCAPACITY = 5; // For CargoPlane
-        public const int IHELIPAD = 5; // For LuxuryYacht
-        public const int ITURBOBOOST = 6; // For SportsCar
-
-
         public string Name { get; set; }
         public double Price { get; set; }
         public double Speed { get; set; }
@@ -52,6 +38,14 @@ namespace Vehicles
             VehicleType = vehicle.VehicleType;
         }
 
+        protected Vehicle(string[] values)
+        {
+            Name = values[VehicleConstants.INAME];
+            Price = Convert.ToDouble(values[VehicleConstants.IPRICE]);
+            Speed = Convert.ToDouble(values[VehicleConstants.ISPEED]);
+            VehicleType = values[VehicleConstants.ITYPE];
+        }
+
         public override bool Equals(object? obj)
         {
             if (obj == null) return false;
@@ -67,12 +61,9 @@ namespace Vehicles
             return sameName && samePrice && sameSpeed && sameType;
         }
 
-        public virtual void LoadFromStringArray(string[] values)
+        public override string ToString()
         {
-            Name = values[INAME];
-            Price = Convert.ToDouble(values[IPRICE]);
-            Speed = Convert.ToDouble(values[ISPEED]);
-            VehicleType = values[ITYPE];
+            return $"{GetType().Name},{Name},{Price},{Speed},{VehicleType}";
         }
 
         public override int GetHashCode()

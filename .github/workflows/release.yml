@@ -82,9 +82,3 @@ jobs:
             - Tax calculation
             - Vehicle sorting
             - Statistics generation
-            
-            ### Downloads
-            - [Windows](VehicleManagementSystem-windows.zip)
-            - [Linux](VehicleManagementSystem-linux.zip)
-            - [macOS (Intel)](VehicleManagementSystem-macos-intel.zip)
-            - [macOS (Apple Silicon)](VehicleManagementSystem-macos-arm.zip)

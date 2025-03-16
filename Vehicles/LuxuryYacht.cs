@@ -1,4 +1,5 @@
 using System;
+using Common;
 
 namespace Vehicles
 {
@@ -21,10 +22,14 @@ namespace Vehicles
             Helipad = luxuryYacht.Helipad;
         }
 
-        public override void LoadFromStringArray(string[] values)
+        public LuxuryYacht(string[] values) : base(values)
         {
-            base.LoadFromStringArray(values);
-            Helipad = Convert.ToBoolean(values[IHELIPAD]);
+            Helipad = Convert.ToBoolean(values[VehicleConstants.IHELIPAD]);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $",{Helipad}";
         }
 
         public override double CalculateTax()
