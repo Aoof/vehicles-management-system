@@ -2,12 +2,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vehicles\Vehicles.csproj" />
+    <ProjectReference Include="..\IndependentClasses\IndependentClasses.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>Services</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>UserInterface</RootNamespace>
     <Nullable>enable</Nullable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute> 

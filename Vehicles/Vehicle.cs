@@ -37,6 +37,21 @@ namespace Vehicles
             VehicleType = vehicle.VehicleType;
         }
 
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            if (obj.GetType() != GetType()) return false;
+
+            Vehicle vehicle = (Vehicle)obj;
+            const double epsilon = 0.0001; 
+            bool sameName = Name == vehicle.Name;
+            bool samePrice = Math.Abs(Price - vehicle.Price) < epsilon;
+            bool sameSpeed = Math.Abs(Speed - vehicle.Speed) < epsilon;
+            bool sameType = VehicleType == vehicle.VehicleType;
+            
+            return sameName && samePrice && sameSpeed && sameType;
+        }
+
         public virtual void DisplayInfo()
         {
             Console.WriteLine(

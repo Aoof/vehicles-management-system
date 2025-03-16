@@ -1,17 +1,15 @@
-using System;
+namespace Exceptions;
 
-namespace Exceptions
+using System;
+public class VehicleException : Exception
 {
-    public class VehicleException : Exception
+    private static int vehicleErrors = 0;
+    public static int VehicleErrors
     {
-        private static int vehicleErrors = 0;
-        public static int VehicleErrors
-        {
-            get { return vehicleErrors; }
-            private set { vehicleErrors = value; }
-        }
-        public VehicleException() : base() { VehicleErrors++; }
-        public VehicleException(string message) : base(message) { VehicleErrors++; }
-        public VehicleException(string message, Exception inner) : base(message, inner) { VehicleErrors++; }
+        get { return vehicleErrors; }
+        private set { vehicleErrors = value; }
     }
+    public VehicleException() : base() { VehicleErrors++; }
+    public VehicleException(string message) : base(message) { VehicleErrors++; }
+    public VehicleException(string message, Exception inner) : base(message, inner) { VehicleErrors++; }
 }

@@ -1,11 +1,9 @@
+namespace Exceptions;
 using System;
 
-namespace Exceptions
+public class InvalidPriceException : VehicleException
 {
-    public class InvalidPriceException : VehicleException
-    {
-        public InvalidPriceException() : base() { }
-        public InvalidPriceException(string message) : base(message) { }
-        public InvalidPriceException(string message, Exception inner) : base(message, inner) { }
-    }
+    public InvalidPriceException() : base() { }
+    public InvalidPriceException(string message) : base(message) { }
+    public InvalidPriceException(string message, Exception inner) : base(message, inner) { }
 }
