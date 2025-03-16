@@ -21,6 +21,12 @@ namespace Vehicles
             Helipad = luxuryYacht.Helipad;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            Helipad = Convert.ToBoolean(values[IHELIPAD]);
+        }
+
         public override double CalculateTax()
         {
             return Price * 0.1;
@@ -31,6 +37,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, has a seating capacity of {SeatingCapacity} seat(s), and {(Helipad ? "has" : "does not have")} a helipad."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Seats: {SeatingCapacity}, Helipad: {(Helipad ? "Yes" : "No")}";
         }
     }
 }

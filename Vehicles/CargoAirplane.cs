@@ -24,6 +24,12 @@ namespace Vehicles
             CargoCapacity = cargoAirplane.CargoCapacity;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            CargoCapacity = Convert.ToDouble(values[ICARGOCAPACITY]);
+        }
+
         public override double CalculateTax()
         {
             return Price * 0.2;
@@ -34,6 +40,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, flies at an altitude of {Altitude} feet, and can carry {CargoCapacity} tons of cargo."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Altitude: {Altitude} ft, Capacity: {CargoCapacity} tons";
         }
     }
 }

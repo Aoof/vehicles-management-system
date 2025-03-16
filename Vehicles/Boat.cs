@@ -21,6 +21,12 @@ namespace Vehicles
             SeatingCapacity = boat.SeatingCapacity;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            SeatingCapacity = double.Parse(values[ISEATINGCAPACITY]);
+        }
+
         public override double CalculateTax()
         {
             return Price * 0.05;
@@ -31,6 +37,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and has a seating capacity of {SeatingCapacity} seat(s)."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Seats: {SeatingCapacity}";
         }
     }
 }

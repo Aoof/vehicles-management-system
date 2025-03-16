@@ -1,9 +1,8 @@
 ﻿namespace UserInterface;
 
 using System;
-using Vehicles;
-using IndependentClasses;
-using Services;
+using Exceptions;
+using static Cli;
 
 public static class UserInterface
 {
@@ -18,16 +17,70 @@ public static class UserInterface
     public static void Run_GUI()
     {
         Console.WriteLine("Running GUI version of the program...");
-        // Run the GUI version of the program
+        Console.WriteLine("GUI version is not implemented yet.");
+        // TODO: Implement GUI version
     }
 
     public static void Run_CLI()
     {
-        Console.WriteLine("Running CLI version of the program... Use --gui or -g to run the GUI version.");
+        Console.WriteLine("Vehicle Management System - CLI Version");
+        Console.WriteLine("=======================================");
 
-        Vehicle vehicle1 = new Car("Toyota", 10000, 200, typeof(Car).Name, 4, "Sedan");
+        bool exit = false;
+        while (!exit)
+        {
+            try
+            {
+                DisplayMainMenu();
+                int choice = GetIntInput("Enter your choice: ");
 
-        double tax1 = TaxCalculator.CalculateTax(vehicle1);
-        Console.WriteLine($"Tax for {vehicle1.VehicleType} is {tax1}");
+                switch (choice)
+                {
+                    case 1:
+                        AddVehicleMenu();
+                        break;
+                    case 2:
+                        ListVehicles();
+                        break;
+                    case 3:
+                        SortVehicles();
+                        break;
+                    case 4:
+                        CalculateTaxes();
+                        break;
+                    case 5:
+                        RemoveVehicle();
+                        break;
+                    case 6:
+                        SaveToFile();
+                        break;
+                    case 7:
+                        LoadFromFile();
+                        break;
+                    case 8:
+                        GenerateStatistics();
+                        break;
+                    case 0:
+                        exit = true;
+                        Console.WriteLine("Thank you for using Vehicle Management System. Goodbye!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
+            catch (VehicleException ex)
+            {
+                Console.WriteLine($"Vehicle Error: {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
     }
 }

@@ -21,9 +21,15 @@ namespace Vehicles
             LoadCapacity = truck.LoadCapacity;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            LoadCapacity = Convert.ToDouble(values[ILOADCAPACITY]);
+        }
+
         public override double CalculateTax()
         {
-            return Price * 0.1;
+            return Price * 0.2;
         }
 
         public override void DisplayInfo()
@@ -31,6 +37,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and has a load capacity of {LoadCapacity} ton(s)."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Load Capacity: {LoadCapacity} tons";
         }
     }
 }

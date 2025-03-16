@@ -24,7 +24,7 @@ namespace Vehicles
 
         public override double CalculateTax()
         {
-            return Price * 0.1;
+            return Price * 0.15;
         }
 
         public override void DisplayInfo()
@@ -32,6 +32,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and flies at an altitude of {Altitude} feet."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Altitude: {Altitude} ft";
         }
     }
 }

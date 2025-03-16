@@ -21,9 +21,15 @@ namespace Vehicles
             Units = train.Units;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            Units = Convert.ToInt32(values[IUNITS]);
+        }
+
         public override double CalculateTax()
         {
-            return Price * 0.1;
+            return 0;
         }
 
         public override void DisplayInfo()
@@ -31,6 +37,11 @@ namespace Vehicles
             Console.WriteLine(
                 $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and has a load capacity of {Units} units."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"Units: {Units}";
         }
     }
 }

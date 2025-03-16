@@ -2,7 +2,7 @@ using System;
 
 namespace Vehicles
 {
-    public class RaceCar : Vehicle
+    public class RaceCar : Car
     {
         public bool TurboBoost { get; set; }
 
@@ -11,9 +11,15 @@ namespace Vehicles
             TurboBoost = false;
         }
 
-        public RaceCar(string name, double price, double speed, string vehicleType, bool turboBoost) : base(name, price, speed, vehicleType)
+        public RaceCar(string name, double price, double speed, string vehicleType, int horsepower, string model, bool turboBoost) : base(name, price, speed, vehicleType, horsepower, model)
         {
             TurboBoost = turboBoost;
+        }
+
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            TurboBoost = Convert.ToBoolean(values[ITURBOBOOST]);
         }
 
         public override double CalculateTax()
@@ -24,8 +30,13 @@ namespace Vehicles
         public override void DisplayInfo()
         {
             Console.WriteLine(
-                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and {(TurboBoost ? "has" : "does not have")} turbo boost."
+                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, has {Horsepower} horsepower, is a {Model}, and {(TurboBoost ? "has" : "does not have")} turbo boost."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"HP: {Horsepower}, Model: {Model}, Turbo: {(TurboBoost ? "Yes" : "No")}";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Vehicles
 
         public Car() : base()
         {
-            Horsepower = 1;
+            Horsepower = 100;
             Model = "Unknown";
         }
 
@@ -25,6 +25,13 @@ namespace Vehicles
             Model = car.Model;
         }
 
+        public override void LoadFromStringArray(string[] values)
+        {
+            base.LoadFromStringArray(values);
+            Horsepower = Convert.ToInt32(values[IHORSEPOWER]);
+            Model = values[IMODEL];
+        }
+
         public override double CalculateTax()
         {
             return Price * 0.1;
@@ -33,8 +40,13 @@ namespace Vehicles
         public override void DisplayInfo()
         {
             Console.WriteLine(
-                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, has {Horsepower} horsepower, and is a {Model}."
+                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, has {Horsepower} horsepower, and is a {Model} model."
             );
+        }
+
+        public override string GetSpecialFeatures()
+        {
+            return $"HP: {Horsepower}, Model: {Model}";
         }
     }
 }

@@ -5,6 +5,21 @@ namespace Vehicles
 {
     public abstract class Vehicle
     {
+        public const int INAME = 0; 
+        public const int IPRICE = 1;
+        public const int ISPEED = 2;
+        public const int ITYPE = 3;
+        public const int ILOADCAPACITY = 4; // For Truck
+        public const int ISEATINGCAPACITY = 4; // For Boat
+        public const int IUNITS = 4; // For Train
+        public const int IHORSEPOWER = 4; // For Car
+        public const int IALTITUDE = 4; // For Plane
+        public const int IMODEL = 5; // For Car
+        public const int ICARGOCAPACITY = 5; // For CargoPlane
+        public const int IHELIPAD = 5; // For LuxuryYacht
+        public const int ITURBOBOOST = 6; // For SportsCar
+
+
         public string Name { get; set; }
         public double Price { get; set; }
         public double Speed { get; set; }
@@ -52,6 +67,19 @@ namespace Vehicles
             return sameName && samePrice && sameSpeed && sameType;
         }
 
+        public virtual void LoadFromStringArray(string[] values)
+        {
+            Name = values[INAME];
+            Price = Convert.ToDouble(values[IPRICE]);
+            Speed = Convert.ToDouble(values[ISPEED]);
+            VehicleType = values[ITYPE];
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Price, Speed, VehicleType);
+        }
+
         public virtual void DisplayInfo()
         {
             Console.WriteLine(
@@ -59,6 +87,8 @@ namespace Vehicles
             );
         }
 
+
+        public abstract string GetSpecialFeatures();
         public abstract double CalculateTax();
     }
 }
