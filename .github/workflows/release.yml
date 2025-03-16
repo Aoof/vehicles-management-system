@@ -1,0 +1,79 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      # Build for different platforms
+      - name: Publish Windows
+        run: dotnet publish -c Release -r win-x64 --self-contained -o ./publish/win-x64 -p:PublishSingleFile=true
+      
+      - name: Publish Linux
+        run: dotnet publish -c Release -r linux-x64 --self-contained -o ./publish/linux-x64 -p:PublishSingleFile=true
+      
+      - name: Publish macOS
+        run: dotnet publish -c Release -r osx-x64 --self-contained -o ./publish/osx-x64 -p:PublishSingleFile=true
+
+      # Create zip archives
+      - name: Zip Windows build
+        run: cd ./publish/win-x64 && zip -r ../../VehicleManagementSystem-windows.zip .
+      
+      - name: Zip Linux build
+        run: cd ./publish/linux-x64 && zip -r ../../VehicleManagementSystem-linux.zip .
+      
+      - name: Zip macOS build
+        run: cd ./publish/osx-x64 && zip -r ../../VehicleManagementSystem-macos.zip .
+
+      # Extract version from tag
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        
+      # Create GitHub Release
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Vehicle Management System v${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            VehicleManagementSystem-windows.zip
+            VehicleManagementSystem-linux.zip
+            VehicleManagementSystem-macos.zip
+          body: |
+            # Vehicle Management System v${{ steps.get_version.outputs.VERSION }}
+            
+            ## Release Notes
+            
+            ### Features in this version:
+            - Vehicle creation and management
+            - Tax calculation
+            - Vehicle sorting
+            - Statistics generation
+            
+            ### Downloads
+            - [Windows](VehicleManagementSystem-windows.zip)
+            - [Linux](VehicleManagementSystem-linux.zip)
+            - [macOS](VehicleManagementSystem-macos.zip)
