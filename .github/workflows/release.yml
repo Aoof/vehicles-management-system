@@ -25,15 +25,18 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release --no-restore
 
-      # Build for different platforms
+      # Build for different platforms - targeting just the main project
       - name: Publish Windows
-        run: dotnet publish -c Release -r win-x64 --self-contained -o ./publish/win-x64 -p:PublishSingleFile=true
+        run: dotnet publish vehicles-management-system.csproj -c Release -r win-x64 --self-contained -o ./publish/win-x64
       
       - name: Publish Linux
-        run: dotnet publish -c Release -r linux-x64 --self-contained -o ./publish/linux-x64 -p:PublishSingleFile=true
+        run: dotnet publish vehicles-management-system.csproj -c Release -r linux-x64 --self-contained -o ./publish/linux-x64
       
-      - name: Publish macOS
-        run: dotnet publish -c Release -r osx-x64 --self-contained -o ./publish/osx-x64 -p:PublishSingleFile=true
+      - name: Publish macOS (Intel)
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-x64 --self-contained -o ./publish/osx-x64
+      
+      - name: Publish macOS (ARM)
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-arm64 --self-contained -o ./publish/osx-arm64
 
       # Create zip archives
       - name: Zip Windows build
@@ -42,8 +45,11 @@ jobs:
       - name: Zip Linux build
         run: cd ./publish/linux-x64 && zip -r ../../VehicleManagementSystem-linux.zip .
       
-      - name: Zip macOS build
-        run: cd ./publish/osx-x64 && zip -r ../../VehicleManagementSystem-macos.zip .
+      - name: Zip macOS (Intel) build
+        run: cd ./publish/osx-x64 && zip -r ../../VehicleManagementSystem-macos-intel.zip .
+        
+      - name: Zip macOS (ARM) build
+        run: cd ./publish/osx-arm64 && zip -r ../../VehicleManagementSystem-macos-arm.zip .
 
       # Extract version from tag
       - name: Get version from tag
@@ -61,7 +67,8 @@ jobs:
           files: |
             VehicleManagementSystem-windows.zip
             VehicleManagementSystem-linux.zip
-            VehicleManagementSystem-macos.zip
+            VehicleManagementSystem-macos-intel.zip
+            VehicleManagementSystem-macos-arm.zip
           body: |
             # Vehicle Management System v${{ steps.get_version.outputs.VERSION }}
             
@@ -76,4 +83,5 @@ jobs:
             ### Downloads
             - [Windows](VehicleManagementSystem-windows.zip)
             - [Linux](VehicleManagementSystem-linux.zip)
-            - [macOS](VehicleManagementSystem-macos.zip)
+            - [macOS (Intel)](VehicleManagementSystem-macos-intel.zip)
+            - [macOS (Apple Silicon)](VehicleManagementSystem-macos-arm.zip)
