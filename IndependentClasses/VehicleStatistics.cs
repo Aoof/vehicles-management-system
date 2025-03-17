@@ -114,6 +114,7 @@ public static class VehicleStatistics
         {
             Console.WriteLine($"Fastest {fastestVehicle.VehicleType}:");
             fastestVehicle.DisplayInfo();
+            Console.WriteLine();
         }
     }
 }

@@ -13,7 +13,7 @@ public static class UserInterface
     // I will leave it as a future improvement.
     public static void Run(string[] args)
     {
-        if (args.Length > 0 && args[0] == "--test" || args[0] == "-t")
+        if (args.Length > 0 && (args[0] == "--test" || args[0] == "-t"))
         {
             Tester.RunTests();
             return;
