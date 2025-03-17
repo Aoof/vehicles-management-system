@@ -1,24 +1,32 @@
 ﻿namespace UserInterface;
 
 using System;
+using Services;
 using Exceptions;
 using static Cli;
 
 public static class UserInterface
 {
+    // In Run method, I was going to check for flags and run the CLI or GUI version of the program.
+    // GUI that works on both Windows, Linux and MacOS is a bit more complicated than CLI.
+    // I found Avalonia, but it's difficult to implement on top of the CLI version.
+    // I will leave it as a future improvement.
     public static void Run(string[] args)
     {
-        if (args.Length > 0 && (args[0] == "--gui" || args[0] == "-g"))
-        { Run_GUI(); } 
-        else
-        { Run_CLI(); }
-    }
+        if (args.Length > 0 && args[0] == "--test" || args[0] == "-t")
+        {
+            Tester.RunTests();
+            return;
+        }
 
-    public static void Run_GUI()
-    {
-        Console.WriteLine("Running GUI version of the program...");
-        Console.WriteLine("GUI version is not implemented yet.");
-        // TODO: Implement GUI version
+        try
+        { FileHandler.LoadFromFile(); }
+        catch (FileHandlingException ex)
+        { Console.WriteLine(ex.Message); }
+        catch (Exception ex)
+        { Console.WriteLine($"An unexpected error occurred: {ex.Message}"); }
+        
+        Run_CLI();
     }
 
     public static void Run_CLI()
@@ -62,6 +70,7 @@ public static class UserInterface
                         break;
                     case 0:
                         exit = true;
+                        FileHandler.SaveToFile();
                         Console.WriteLine("Thank you for using Vehicle Management System. Goodbye!");
                         break;
                     default:

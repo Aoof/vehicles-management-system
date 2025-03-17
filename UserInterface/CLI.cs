@@ -7,6 +7,7 @@ using Services;
 
 public static class Cli
 {
+    private static bool isSortOverride = false;
     public static void DisplayMainMenu()
     {
         Console.Clear();
@@ -100,13 +101,10 @@ public static class Cli
         Console.Clear();
         Console.WriteLine("Vehicle List");
         Console.WriteLine("============");
-        
-        var result = VehicleManager.PrintVehicles();
-        
-        if (result == null)
-        {
-            Console.WriteLine("No vehicles to display.");
-        }
+
+        if (!isSortOverride)
+        { VehicleComparer.SortByType(VehicleManager.Vehicles); }
+        VehicleManager.PrintVehicles();
         
         Console.WriteLine("\nPress any key to return to main menu...");
         Console.ReadKey();
@@ -154,6 +152,8 @@ public static class Cli
                     Console.WriteLine("Invalid option.");
                     break;
             }
+
+            isSortOverride = true;
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -244,9 +244,9 @@ public static class Cli
             Console.WriteLine("Save Vehicles to File");
             Console.WriteLine("====================");
             
-            // TODO: Implement file saving functionality
-            
-            Console.WriteLine("This feature is not implemented yet.");
+            FileHandler.SaveToFile();
+
+            Console.WriteLine("Vehicles saved successfully.");
         }
         catch (Exception ex)
         {
@@ -264,7 +264,7 @@ public static class Cli
             Console.Clear();
             Console.WriteLine("Load Vehicles from File");
             Console.WriteLine("======================");
-            
+
             FileHandler.LoadFromFile();
             
             Console.WriteLine("Vehicles loaded successfully.");
@@ -294,15 +294,69 @@ public static class Cli
                 return;
             }
             
-            // TODO: Implement vehicle statistics generation
-            Console.WriteLine("This feature is not implemented yet.");
+            Console.WriteLine("\n1. Most Expensive Vehicle");
+            Console.WriteLine("2. Vehicles Exceeding Speed");
+            Console.WriteLine("3. Trucks Exceeding Load Capacity");
+            Console.WriteLine("4. Average Price per Vehicle Type");
+            Console.WriteLine("5. Count Each Vehicle Type");
+            Console.WriteLine("6. Fastest Vehicle per Category");
+            Console.WriteLine("0. Back to Main Menu");
+            
+            int choice = GetIntInput("\nSelect a statistic to view: ");
+            
+            switch (choice)
+            {
+                case 0:
+                    return;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Most Expensive Vehicle");
+                    Console.WriteLine("=====================");
+                    VehicleStatistics.FindMostEpensiveVehicle();
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Vehicles Exceeding Speed");
+                    Console.WriteLine("======================");
+                    double speedThreshold = GetDoubleInput("Enter speed threshold (mph): ");
+                    VehicleStatistics.FindVehiclesExceedingSpeed(speedThreshold);
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("Trucks Exceeding Load Capacity");
+                    Console.WriteLine("============================");
+                    double loadCapacityThreshold = GetDoubleInput("Enter load capacity threshold (tons): ");
+                    VehicleStatistics.FindTrucksExceedingLoadCapacity(loadCapacityThreshold);
+                    break;
+                case 4:
+                    Console.Clear();
+                    Console.WriteLine("Average Price per Vehicle Type");
+                    Console.WriteLine("============================");
+                    VehicleStatistics.FindAveragePricePerType();
+                    break;
+                case 5:
+                    Console.Clear();
+                    Console.WriteLine("Count Each Vehicle Type");
+                    Console.WriteLine("=====================");
+                    VehicleStatistics.CountEachType();
+                    break;
+                case 6:
+                    Console.Clear();
+                    Console.WriteLine("Fastest Vehicle per Category");
+                    Console.WriteLine("==========================");
+                    VehicleStatistics.FindFastestPerCategory();
+                    break;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    break;
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error generating statistics: {ex.Message}");
         }
         
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
 

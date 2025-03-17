@@ -21,7 +21,7 @@ public static class VehicleManager
         Console.WriteLine("Current Vehicles:");
         Console.WriteLine(new string('-', 100));
         Console.WriteLine(
-            $"{"Name",-20} {"Price",-10} {"Speed",-10} {"Type",-15} {"Special Features",-40}"
+            $"{"Name",-15} {"Price",-20} {"Speed",-10} {"Type",-15} {"Special Features",-40}"
         );
         Console.WriteLine(new string('-', 100));
 
@@ -31,7 +31,7 @@ public static class VehicleManager
             string specialFeatures = vehicles[i].GetSpecialFeatures();
 
             Console.WriteLine(
-                $"{vehicles[i].Name,-20} ${vehicles[i].Price,-9:C} {vehicles[i].Speed,-10:F1} {vehicles[i].VehicleType,-15} {specialFeatures,-40}"
+                $"{vehicles[i].Name,-15} {vehicles[i].Price,-20:C} {vehicles[i].Speed,-10:F1} {vehicles[i].VehicleType,-15} {specialFeatures,-40}"
             );
             
             result[i, 0] = vehicles[i].Name;

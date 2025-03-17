@@ -16,5 +16,6 @@
         public const int ICARGOCAPACITY = 6; // For CargoPlane
         public const int IHELIPAD = 6; // For LuxuryYacht
         public const int ITURBOBOOST = 7; // For SportsCar
+        readonly public static string[] VEHICLE_TYPES = ["Boat", "Truck", "Train", "Car", "Airplane", "CargoAirplane", "LuxuryYacht", "SportsCar"];
     }
 }

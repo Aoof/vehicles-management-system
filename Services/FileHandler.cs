@@ -3,11 +3,12 @@ using System;
 using System.IO;
 using Vehicles;
 using Common;
+using Exceptions;
 
 public static class FileHandler
 {
-    public static string DefaultFilePath { get; } = "../data/VMS_SaveFile.dat";
-    public static string FilePath { get; set; } = "../data/VMS_SaveFile.dat";
+    public static string DefaultFilePath { get; } = "./data/vehicles.txt";
+    public static string FilePath { get; set; } = "./data/vehicles.txt";
     
     public static void SaveToFile()
     {
@@ -29,8 +30,7 @@ public static class FileHandler
                 return;
             }
 
-            Console.WriteLine("No save file found.");
-            return;
+            throw new FileHandlingException("No save file found to load.");
         }
 
         using StreamReader reader = new(FilePath);
