@@ -33,16 +33,16 @@ jobs:
 
       # Build for different platforms - targeting just the main project
       - name: Publish Windows
-        run: dotnet publish vehicles-management-system.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/win-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r win-x64 --self-contained -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/win-x64
       
       - name: Publish Linux
-        run: dotnet publish vehicles-management-system.csproj -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/linux-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r linux-x64 --self-contained -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/linux-x64
       
       - name: Publish macOS (Intel)
-        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-x64 --self-contained -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-x64
       
       - name: Publish macOS (ARM)
-        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-arm64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-arm64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-arm64 --self-contained -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-arm64
 
       # Create data directory and include sample data
       - name: Prepare data directory
@@ -118,5 +118,8 @@ jobs:
             - 100MB disk space
             - 4GB RAM recommended
             
+            ### Resolved Issues
+            - Resolved macOS build issues
+
             ### Known Issues
             - None at this time
