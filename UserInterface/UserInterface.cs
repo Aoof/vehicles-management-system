@@ -68,6 +68,12 @@ public static class UserInterface
                     case 8:
                         GenerateStatistics();
                         break;
+                    case 9:
+                        SearchVehicle();
+                        break;
+                    case 10:
+                        Tester.RunTests();
+                        break; 
                     case 0:
                         exit = true;
                         FileHandler.SaveToFile();

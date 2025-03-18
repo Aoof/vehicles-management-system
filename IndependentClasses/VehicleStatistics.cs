@@ -2,119 +2,104 @@ namespace IndependentClasses;
 
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using Services;
 using Vehicles;
 using Common;
 
 public static class VehicleStatistics
 {
-    public static void FindMostEpensiveVehicle()
+    public static Vehicle? FindMostEpensiveVehicle()
     {
         if (VehicleManager.Vehicles.Length == 0)
         {
-            Console.WriteLine("No vehicles in the system.");
-            return;
+            return null;
         }
         
         var sortedVehicles = from vehicle in VehicleManager.Vehicles
-                                   orderby vehicle.Price descending
-                                   select vehicle;
+                             orderby vehicle.Price descending
+                             select vehicle;
         
-        Console.WriteLine("Most expensive vehicle:");
-        sortedVehicles.First().DisplayInfo();
+        return sortedVehicles.First();
     }
 
-    public static void FindVehiclesExceedingSpeed(double speed)
+    public static IEnumerable<Vehicle> FindVehiclesExceedingSpeed(double speed)
     {
-        Console.WriteLine($"Vehicles with speed greater than {speed}:");
-        bool found = false;
-        
         var exceedingSpeed = from vehicle in VehicleManager.Vehicles
-                     where vehicle.Speed > speed
-                     select vehicle;
+                             where vehicle.Speed > speed
+                             select vehicle;
 
-        foreach (var vehicle in exceedingSpeed)
-        {
-            vehicle.DisplayInfo();
-            found = true;
-        }
-        
-        if (!found)
-        {
-            Console.WriteLine("None found.");
-        }
+        return exceedingSpeed;
     }
 
-    public static void FindTrucksExceedingLoadCapacity(double loadCapacity)
+    public static IEnumerable<Vehicle> FindTrucksExceedingLoadCapacity(double loadCapacity)
     {
-        Console.WriteLine($"Trucks with capacity greater than {loadCapacity}:");
-        bool found = false;
-
         var exceedingCapacity = from vehicle in VehicleManager.Vehicles
                                 where vehicle is Truck truck && truck.LoadCapacity > loadCapacity
                                 select vehicle;
 
-        foreach (var vehicle in exceedingCapacity)
-        {
-            vehicle.DisplayInfo();
-            found = true;
-        }
-        
-        if (!found)
-        {
-            Console.WriteLine("None found.");
-        }
+        return exceedingCapacity;
     }
 
-    public static void FindAveragePricePerType()
+    public static Dictionary<string, double> FindAveragePricePerType()
     {
         var averagePricesByType = from vehicle in VehicleManager.Vehicles
-                                 group vehicle by vehicle.GetType().Name into typeGroup
-                                 where VehicleConstants.VEHICLE_TYPES.Contains(typeGroup.Key)
-                                 select new { Type = typeGroup.Key, AveragePrice = typeGroup.Average(v => v.Price) };
-
+                                  group vehicle by vehicle.GetType().Name into typeGroup
+                                  where VehicleConstants.VEHICLE_TYPES.Contains(typeGroup.Key)
+                                  select new { Type = typeGroup.Key, AveragePrice = typeGroup.Average(v => v.Price) };
+        
+        Dictionary<string, double> result = new Dictionary<string, double>();
+        
         foreach (var typePriceInfo in averagePricesByType)
         {
-            Console.WriteLine($"Average price of {typePriceInfo.Type}: {typePriceInfo.AveragePrice:C}");
+            result[typePriceInfo.Type] = typePriceInfo.AveragePrice;
         }
+        
+        return result;
     }
 
-    public static void FindAveragePriceOfAllVehicles()
+    public static double FindAveragePriceOfAllVehicles()
     {
         if (VehicleManager.Vehicles.Length == 0)
         {
-            Console.WriteLine("No vehicles in the system.");
-            return;
+            return 0;
         }
 
         double averagePrice = VehicleManager.Vehicles.Average(v => v.Price);
-        Console.WriteLine($"Average price of all vehicles: {averagePrice:C}");
+        
+        return averagePrice;
     }
 
-    public static void CountEachType()
+    public static Dictionary<string, int> CountEachType()
     {
         var vehicleCountsByType = from vehicle in VehicleManager.Vehicles
-                                 group vehicle by vehicle.GetType().Name into typeGroup
-                                 where VehicleConstants.VEHICLE_TYPES.Contains(typeGroup.Key)
-                                 select new { Type = typeGroup.Key, Count = typeGroup.Count() };
-
+                                  group vehicle by vehicle.GetType().Name into typeGroup
+                                  where VehicleConstants.VEHICLE_TYPES.Contains(typeGroup.Key)
+                                  select new { Type = typeGroup.Key, Count = typeGroup.Count() };
+        
+        Dictionary<string, int> result = new Dictionary<string, int>();
+        
         foreach (var typeCountInfo in vehicleCountsByType)
         {
-            Console.WriteLine($"Number of {typeCountInfo.Type}: {typeCountInfo.Count}");
+            result[typeCountInfo.Type] = typeCountInfo.Count;
         }
+        
+        return result;
     }
 
-    public static void FindFastestPerCategory()
+    public static Dictionary<string, Vehicle> FindFastestPerCategory()
     {
         var fastestVehiclesByCategory = from vehicle in VehicleManager.Vehicles
-                                       group vehicle by vehicle.VehicleType into categoryGroup
-                                       select categoryGroup.OrderByDescending(v => v.Speed).First();
+                                        group vehicle by vehicle.VehicleType into categoryGroup
+                                        select categoryGroup.OrderByDescending(v => v.Speed).First();
 
+        Dictionary<string, Vehicle> result = new Dictionary<string, Vehicle>();
+        
         foreach (var fastestVehicle in fastestVehiclesByCategory)
         {
-            Console.WriteLine($"Fastest {fastestVehicle.VehicleType}:");
-            fastestVehicle.DisplayInfo();
-            Console.WriteLine();
+            result[fastestVehicle.VehicleType] = fastestVehicle;
         }
+        
+        return result;
     }
 }

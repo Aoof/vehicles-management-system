@@ -1,35 +1,8 @@
-Train,Freighter,3500000,90,Cargo,25
-Airplane,Boeing 747,350000000,570,Commercial,35000
-CargoAirplane,Boeing 747-8F,420000000,560,Commercial,45100,137.7
-Airplane,Airbus A380,445000000,560,Commercial,43000
-Car,Corolla,23000,110,Compact,125,Toyota
-Truck,Colorado,38000,110,Compact,1.5
-Truck,Tundra,52000,90,Construction,4
-LuxuryYacht,Dilbar,550000000,22,Deluxe,40,True
-LuxuryYacht,Octopus,250000000,20,Explorer,26,True
-Car,Accord,30000,125,Family,192,Honda
-Boat,Fisherman,28000,40,Fishing,6
-CargoAirplane,Antonov An-225,250000000,528,Heavy,33000,250
-Truck,Silverado,55000,95,Heavy Duty,3
-Train,Bullet,5000000,300,High-Speed,12
-Boat,Pontoon,25000,25,Leisure,8
-Boat,Cruiser,120000,35,Luxury,10
-Boat,Kayak,1200,5,Manual,2
-LuxuryYacht,Azzam,600000000,30,Mega,64,True
-Car,Camry,28000,130,Mid-size,203,Toyota
-CargoAirplane,C-130 Hercules,30000000,340,Military,42000,22
-Airplane,F-16,65000000,1500,Military,50000
-CargoAirplane,Boeing C-17,220000000,450,Military,45000,85
-Train,Express,2000000,150,Passenger,8
-Truck,F-150,45000,100,Pickup,2.5
-LuxuryYacht,Rising Sun,200000000,28,Premium,16,False
-Airplane,Cessna 172,150000,130,Private,10000
-Airplane,Learjet 75,13500000,465,Private,51000
-Car,Civic,25000,120,Sedan,140,Honda
-CargoAirplane,Airbus Beluga,200000000,500,Specialized,35000,47
-Boat,Speedster,35000,60,Speedboat,4
-Car,Mustang,45000,155,Sports,310,Ford
-LuxuryYacht,Eclipse,500000000,25,Super,36,True
-Train,Monorail,4000000,110,Tourist,10
-Train,Metro,1500000,70,Urban,6
-Truck,Ram 1500,48000,105,Utility,2.7
+Car,Test Car,25000,120,Sedan,150,TestModel
+Truck,Test Truck,45000,90,Pickup,2.5
+Boat,Test Boat,35000,50,Speedboat,6
+Airplane,Test Plane,2000000,500,Commercial,35000
+Train,Test Train,1500000,200,Passenger,8
+CargoAirplane,Cargo Plane,4000000,450,Freight,30000,120
+RaceCar,Race Car,350000,220,Formula,700,Speedster,True
+LuxuryYacht,Yacht,5000000,40,Luxury,20,True

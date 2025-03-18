@@ -28,18 +28,33 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release --no-restore
 
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal
+
       # Build for different platforms - targeting just the main project
       - name: Publish Windows
-        run: dotnet publish vehicles-management-system.csproj -c Release -r win-x64 --self-contained -o ./publish/win-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/win-x64
       
       - name: Publish Linux
-        run: dotnet publish vehicles-management-system.csproj -c Release -r linux-x64 --self-contained -o ./publish/linux-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/linux-x64
       
       - name: Publish macOS (Intel)
-        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-x64 --self-contained -o ./publish/osx-x64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-x64
       
       - name: Publish macOS (ARM)
-        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-arm64 --self-contained -o ./publish/osx-arm64
+        run: dotnet publish vehicles-management-system.csproj -c Release -r osx-arm64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/osx-arm64
+
+      # Create data directory and include sample data
+      - name: Prepare data directory
+        run: |
+          mkdir -p ./publish/win-x64/data
+          mkdir -p ./publish/linux-x64/data
+          mkdir -p ./publish/osx-x64/data
+          mkdir -p ./publish/osx-arm64/data
+          cp -r ./data/* ./publish/win-x64/data/
+          cp -r ./data/* ./publish/linux-x64/data/
+          cp -r ./data/* ./publish/osx-x64/data/
+          cp -r ./data/* ./publish/osx-arm64/data/
 
       # Create zip archives
       - name: Zip Windows build
@@ -77,8 +92,31 @@ jobs:
             
             ## Release Notes
             
-            ### Features in this version:
-            - Vehicle creation and management
-            - Tax calculation
-            - Vehicle sorting
-            - Statistics generation
+            ### Vehicle Management
+            - Multiple vehicle types (Car, Truck, Boat, Airplane, Train)
+            - Specialized vehicle types (RaceCar, LuxuryYacht, CargoAirplane)
+            - Custom attributes for each vehicle type
+            - Vehicle creation, reading, updating, and deletion operations
+            
+            ### Financial Features
+            - Tax calculation based on vehicle type and value
+            - Price comparisons between vehicles
+            - Value-based sorting and filtering
+            
+            ### Data Operations
+            - Save/load vehicle data from CSV files
+            - Custom file location support
+            - Error handling and data validation
+            
+            ### Analysis Tools
+            - Vehicle statistics generation
+            - Cross-vehicle type comparisons
+            - Performance metrics for different vehicle categories
+            
+            ### System Requirements
+            - .NET 9.0+ runtime
+            - 100MB disk space
+            - 4GB RAM recommended
+            
+            ### Known Issues
+            - None at this time

@@ -25,7 +25,7 @@ public static class VehicleComparer
 
     private static bool ShouldSwapSpeed(Vehicle v1, Vehicle v2) => v1.Speed > v2.Speed;
     private static bool ShouldSwapPrice(Vehicle v1, Vehicle v2) => v1.Price > v2.Price;
-    private static bool ShouldSwapType(Vehicle v1, Vehicle v2) => string.Compare(v1.VehicleType, v2.VehicleType) > 0;
+    private static bool ShouldSwapType(Vehicle v1, Vehicle v2) => string.Compare(v1.GetType().Name, v2.GetType().Name) > 0;
 
     public static void SortBySpeed(Vehicle[] vehicles) => Sort(vehicles, ShouldSwapSpeed);
     public static void SortByPrice(Vehicle[] vehicles) => Sort(vehicles, ShouldSwapPrice);

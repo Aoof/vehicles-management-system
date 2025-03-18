@@ -6,10 +6,12 @@ A comprehensive C# application for managing different types of vehicles, includi
 
 ```
 .
+├── Common                # Common utility class for vehicle constants
 ├── Exceptions            # Custom exceptions for vehicle validation
 ├── IndependentClasses    # Utility classes for vehicle operations
 ├── Services              # Service classes for file operations and vehicle management
 ├── Vehicles              # Vehicle class implementations
+├── UserInterface         # Console-based user interface for vehicle management
 ├── Program.cs            # Main application entry point
 └── README.md             # Project documentation
 ```
@@ -58,7 +60,7 @@ Service classes for application operations:
 
 ### Prerequisites
 
-- .NET 6.0+ SDK
+- .NET 9.0+ SDK
 - Visual Studio 2022 or VS Code with C# extensions
 
 ### Running the Application
@@ -70,17 +72,74 @@ Service classes for application operations:
 
 ## Usage
 
+The Vehicle Management System provides a command-line interface for managing your vehicle collection:
+
+1. **Adding Vehicles**: 
+   - Select "Add Vehicle" from the main menu
+   - Choose a vehicle type (Car, Truck, Boat, etc.)
+   - Enter requested details for the specific vehicle type
+
+2. **Managing Vehicles**:
+   - List all vehicles in the system
+   - Search for specific vehicles by name or type
+   - Update vehicle information
+   - Remove vehicles from the system
+
+3. **Data Operations**:
+   - Save your vehicle collection to a CSV file
+   - Load vehicle data from existing files
+   - Export statistics about your vehicle collection
+
+4. **Advanced Features**:
+   - Compare different vehicles by various properties
+   - Calculate tax liability for each vehicle
+   - Generate reports on vehicle value distribution
 
 ## Features
 
-- Create and manage different types of vehicles
-- Calculate taxes and statistics for vehicles
-- Compare vehicle properties
-- Save and load vehicle data from files
+- **Comprehensive Vehicle Management**:
+  - Create and manage different types of vehicles with specific properties
+  - Support for land, water, and air vehicles with specialized attributes
+  - Extensible framework for adding new vehicle types
+
+- **Advanced Calculations**:
+  - Calculate taxes based on vehicle type, price, and regional settings
+  - Generate statistics including average price, speed range, and type distribution
+  - Compare vehicles across multiple dimensions (speed, value, capacity)
+
+- **Data Persistence**:
+  - Save and load vehicle data from CSV files with comma-separated values
+  - Support for custom file locations and multiple save files
+  - Error handling for file operations with recovery mechanisms
+
+- **Flexible Architecture**:
+  - Object-oriented design with inheritance for vehicle types
+  - Service-based architecture for separation of concerns
+  - Custom exception handling for robust error management
 
 ## Future Enhancements
 
+- **Graphical User Interface**:
+  - Desktop application with modern UI
+  - Interactive vehicle visualization
+  - Drag-and-drop functionality for vehicle management
+
+- **Extended Features**:
+  - Vehicle maintenance scheduling and tracking
+  - Fuel efficiency calculations and comparisons
+  - Integration with external vehicle databases
+
+- **Advanced Analytics**:
+  - Predictive maintenance recommendations
+  - Value depreciation forecasting
+  - Cost of ownership analysis
+
+- **Mobile Support**:
+  - Cross-platform mobile application
+  - Synchronization between devices
+  - Barcode/QR code scanning for quick vehicle lookup
 
 ## License
 
-MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

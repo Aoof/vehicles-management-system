@@ -40,7 +40,7 @@ namespace Vehicles
         public override void DisplayInfo()
         {
             Console.WriteLine(
-                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and has a load capacity of {LoadCapacity} ton(s)."
+                $"This {VehicleType} is named {Name}, costs ${Price}, can go {Speed} mph, and has a load capacity of {LoadCapacity} kg(s)."
             );
         }
 

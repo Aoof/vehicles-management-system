@@ -21,8 +21,42 @@ public static class Cli
         Console.WriteLine("6. Save vehicles to file");
         Console.WriteLine("7. Load vehicles from file");
         Console.WriteLine("8. Generate vehicle statistics");
+        Console.WriteLine("9. Search for vehicle");
+        Console.WriteLine("10. Run tests");
         Console.WriteLine("0. Exit");
         Console.WriteLine("====================================");
+    }
+
+    public static void SearchVehicle()
+    {
+        Console.Clear();
+        Console.WriteLine("Search Vehicle");
+        Console.WriteLine("==============");
+        
+        if (VehicleManager.Vehicles.Length == 0)
+        {
+            Console.WriteLine("No vehicles to search. Please add vehicles first.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        string searchQuery = GetStringInput("Enter search term: ");
+        Vehicle[]? searchResults = VehicleManager.SearchVehicles(searchQuery);
+        
+        if (searchResults != null && searchResults.Length == 0)
+        {
+            Console.WriteLine("No vehicles found.");
+        }
+        else
+        {
+            Console.WriteLine("Search Results");
+            Console.WriteLine("==============");
+            VehicleManager.PrintVehicles(searchResults);
+        }
+        
+        Console.WriteLine("\nPress any key to return to main menu...");
+        Console.ReadKey();
     }
 
     public static void AddVehicleMenu()
@@ -312,39 +346,91 @@ public static class Cli
                     Console.Clear();
                     Console.WriteLine("Most Expensive Vehicle");
                     Console.WriteLine("=====================");
-                    VehicleStatistics.FindMostEpensiveVehicle();
+                    Vehicle? mostExpensive = VehicleStatistics.FindMostEpensiveVehicle();
+                    if (mostExpensive == null)
+                    {
+                        Console.WriteLine("No vehicles in the system.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Most expensive vehicle:");
+                        mostExpensive.DisplayInfo();
+                    }
                     break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Vehicles Exceeding Speed");
                     Console.WriteLine("======================");
                     double speedThreshold = GetDoubleInput("Enter speed threshold (mph): ");
-                    VehicleStatistics.FindVehiclesExceedingSpeed(speedThreshold);
+                    var exceedingSpeedVehicles = VehicleStatistics.FindVehiclesExceedingSpeed(speedThreshold);
+                    
+                    Console.WriteLine($"Vehicles with speed greater than {speedThreshold}:");
+                    bool foundSpeedExceeding = false;
+                    foreach (var vehicle in exceedingSpeedVehicles)
+                    {
+                        vehicle.DisplayInfo();
+                        foundSpeedExceeding = true;
+                    }
+                    
+                    if (!foundSpeedExceeding)
+                    {
+                        Console.WriteLine("None found.");
+                    }
                     break;
                 case 3:
                     Console.Clear();
                     Console.WriteLine("Trucks Exceeding Load Capacity");
                     Console.WriteLine("============================");
-                    double loadCapacityThreshold = GetDoubleInput("Enter load capacity threshold (tons): ");
-                    VehicleStatistics.FindTrucksExceedingLoadCapacity(loadCapacityThreshold);
+                    double loadCapacityThreshold = GetDoubleInput("Enter load capacity threshold (kg): ");
+                    var exceedingCapacityTrucks = VehicleStatistics.FindTrucksExceedingLoadCapacity(loadCapacityThreshold);
+                    
+                    Console.WriteLine($"Trucks with capacity greater than {loadCapacityThreshold}:");
+                    bool foundCapacityExceeding = false;
+                    foreach (var vehicle in exceedingCapacityTrucks)
+                    {
+                        vehicle.DisplayInfo();
+                        foundCapacityExceeding = true;
+                    }
+                    
+                    if (!foundCapacityExceeding)
+                    {
+                        Console.WriteLine("None found.");
+                    }
                     break;
                 case 4:
                     Console.Clear();
                     Console.WriteLine("Average Price per Vehicle Type");
                     Console.WriteLine("============================");
-                    VehicleStatistics.FindAveragePricePerType();
+                    var averagePrices = VehicleStatistics.FindAveragePricePerType();
+                    
+                    foreach (var typePricePair in averagePrices)
+                    {
+                        Console.WriteLine($"Average price of {typePricePair.Key}: {typePricePair.Value:C}");
+                    }
                     break;
                 case 5:
                     Console.Clear();
                     Console.WriteLine("Count Each Vehicle Type");
                     Console.WriteLine("=====================");
-                    VehicleStatistics.CountEachType();
+                    var typeCounts = VehicleStatistics.CountEachType();
+                    
+                    foreach (var typeCountPair in typeCounts)
+                    {
+                        Console.WriteLine($"Number of {typeCountPair.Key}: {typeCountPair.Value}");
+                    }
                     break;
                 case 6:
                     Console.Clear();
                     Console.WriteLine("Fastest Vehicle per Category");
                     Console.WriteLine("==========================");
-                    VehicleStatistics.FindFastestPerCategory();
+                    var fastestPerCategory = VehicleStatistics.FindFastestPerCategory();
+                    
+                    foreach (var categoryVehiclePair in fastestPerCategory)
+                    {
+                        Console.WriteLine($"Fastest {categoryVehiclePair.Key}:");
+                        categoryVehiclePair.Value.DisplayInfo();
+                        Console.WriteLine();
+                    }
                     break;
                 default:
                     Console.WriteLine("Invalid option.");
@@ -386,7 +472,7 @@ public static class Cli
         double price = GetDoubleInput("Enter price: $");
         double speed = GetDoubleInput("Enter maximum speed (mph): ");
         string type = GetStringInput("Enter truck type (e.g., Pickup, Semi): ");
-        double loadCapacity = GetDoubleInput("Enter load capacity (tons): ");
+        double loadCapacity = GetDoubleInput("Enter load capacity (kg): ");
         
         return new Truck(name, price, speed, type, loadCapacity);
     }
