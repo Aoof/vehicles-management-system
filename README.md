@@ -65,10 +65,26 @@ Service classes for application operations:
 
 ### Running the Application
 
-1. Clone the repository `git clone https://github.com/aoof/vehicle-management-system.git`
+1. Clone the repository `git clone https://github.com/aoof/vehicles-management-system.git`
 2. Open the solution in your preferred IDE
 3. Build the solution `dotnet build`
-4. Run the Program.cs file `dotnet run`
+4. Run the Program.cs file `dotnet run` or to run tests `dotnet run -t`
+
+#### To Run on Linux
+
+1. Install the linux release file from [releases page](https://github.com/aoof/vehicles-management-system/releases/latest)
+2. Extract using unzip `unzip vehicles-management-system-linux.zip -d vehicles-management-system`
+3. Give execute permissions `chmod +x vehicles-management-system/vehicles-management-system`
+4. Run the application `./vehicles-management-system/vehicles-management-system`
+
+#### To Run on MacOS
+
+> Note: MacOS generally has more security restrictions so save yourself the time and clone the repo and build the application yourself
+
+1. Ensure you have the latest version of .NET installed on your machine
+2. Install the macos release file from [releases page](https://github.com/aoof/vehicles-management-system/releases/latest)
+3. Uncompress or extract using unzip `unzip vehicles-management-system-macos.zip -d vehicles-management-system`
+4. Run `dotnet vehicles-management-system/vehicles-management-system.dll` to start the application (Additional security permissions may be required)
 
 ## Usage
 
