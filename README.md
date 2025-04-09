@@ -133,28 +133,6 @@ The Vehicle Management System provides a command-line interface for managing you
   - Service-based architecture for separation of concerns
   - Custom exception handling for robust error management
 
-## Future Enhancements
-
-- **Graphical User Interface**:
-  - Desktop application with modern UI
-  - Interactive vehicle visualization
-  - Drag-and-drop functionality for vehicle management
-
-- **Extended Features**:
-  - Vehicle maintenance scheduling and tracking
-  - Fuel efficiency calculations and comparisons
-  - Integration with external vehicle databases
-
-- **Advanced Analytics**:
-  - Predictive maintenance recommendations
-  - Value depreciation forecasting
-  - Cost of ownership analysis
-
-- **Mobile Support**:
-  - Cross-platform mobile application
-  - Synchronization between devices
-  - Barcode/QR code scanning for quick vehicle lookup
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
